@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 400 -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!-- 700 -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="./css/all.css">
+    <style>
+        body{
+            color: #493A25;
+        }
+        .brown{
+            color: #493A25;
+            font-weight: bold;
+        }
+        .light-brown{
+          color:#AFA89F;
+        }
+        .middle-brown{
+          color:#C0AB8E;
+        }
+        .brown-button{
+          color: white;
+          background-color:#C0AB8E;
+        }
+        .brown-button:hover{
+          background-color: #493A25;
+          color: white;
+        }
+
+        .btn-pd{
+            padding-top: 13px;
+            padding-bottom: 13px;
+        }
+     
+        .HanziPen-TC{
+          font-family: 'HanziPen TC';
+        }
+        
+        /* 修改placeholder顏色 */
+        ::placeholder {
+          color: #D3CCC1 !important;
+        }
+
+        .bg-gradient{
+          background: linear-gradient(#e66465, #9198e5);
+        }
+
+        #searchModal, #navbarTogglerModal{
+          margin-top: 80px;
+        }
+
+        /* .triangle{
+          width:  10em;
+          height: 10em;
+          transform: roate(-60deg) skewX(-30deg) scale(1, 0.866);
+          background-color: #9198e5;
+          border-top-right-radius: 30%;
+        } */
+
+        .triangle {
+          fill: #F5AE4C; /* 三角形填滿 */
+          stroke: #F5AE4C; /* 三角形外框填滿 */
+          stroke-width: 60; /* 三角形外框圓弧大小 */
+        }
+
+      
+    </style>
+</head>
+<body>
+    <div id="app">
+      <!-- 看看遮罩的z-index -->
+      <!-- z-index: 2000 蓋過遮罩 -->
+      <div class="fixed-top" style="z-index: 2000 !important;">
+        <div class="bg-white">
+          <nav class="navbar navbar-expand-lg navbar-light container  d-flex flex-column">
+            <div class="container-fluid position-relative">
+              <!-- 多加一個div -->
+              <div class="d-flex align-items-center">
+                <a class="navbar-brand" href="#">
+                  <img src="./images/logo.png" style="height: 35px;" class="logo" alt="">
+                </a>
+                <div class="position-absolute end-0 ">
+                  <button type="button" class="btn border-0 d-lg-none" style="font-size: 14px;">
+                    登入
+                  </button>
+
+                  <button type="button" class="btn border-0 d-lg-none brown-button badge rounded-pill" style="font-size: 14px;">
+                    註冊
+                  </button>
+
+                  <button type="button" class="btn border-0 d-lg-none p-0 ps-2" data-bs-toggle="modal" data-bs-target="#searchModal">
+                    <img src="./images/icon-search mobile.png" style="height: 25px;" alt="">
+                  </button>
+                  <button class="navbar-toggler border-0" type="button" data-bs-toggle="modal" data-bs-target="#navbarTogglerModal">
+                    <!-- navbar-toggler-icon -->
+                    <span class="navbar-toggler-icon" style="background-image: url(./images/icon\ -menu\ mobile.png); "></span>
+                  </button>
+                </div>
+              </div>
+  
+              <!-- 菜單Modal -->
+              <div class="modal fade" id="navbarTogglerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                <div class="modal-dialog mx-3">
+                  <!-- 改變modal弧度 -->
+                  <div class="modal-content" style="border-radius: 20px;">
+                    <!-- border-0 -->
+                    <div class="modal-header border-0 p-0">
+                      <button type="button" class="ms-auto border-0 bg-transparent p-3" data-bs-dismiss="modal" aria-label="Close">
+                        <img src="./images/icon-close mobile.png" alt="">
+                      </button>
+                    </div> 
+                    <div class="modal-body p-0 mx-4">
+                      <ul class="list-unstyled">
+                        <li class="text-center border-bottom pb-3"><a href="#" class="menuLink">甜點食譜</a></li>
+                        <li class="text-center border-bottom p-3"><a href="#" class="menuLink">材料購買</a></li>
+                        <li class="text-center border-bottom p-3"><a href="#" class="menuLink">優惠特報</a></li>
+                        <li class="text-center pt-3"><a href="#" class="menuLink">會員專區</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- 搜尋Modal -->
+              <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                <div class="modal-dialog mx-3 ">
+                  <!-- 改變modal弧度 -->
+                  <div class="modal-content" style="border-radius: 20px;">
+                    <!-- border-0 -->
+                    <div class="modal-header border-0 p-0">
+                      <button type="button" class="ms-auto border-0 bg-transparent p-3" data-bs-dismiss="modal" aria-label="Close">
+                        <img src="./images/icon-close mobile.png" alt="">
+                      </button>
+                    </div> 
+                    <div class="modal-body p-0 mx-4">
+                      <ul class="list-unstyled">
+                        <li class="text-center border-bottom pb-3 d-flex flex-column">
+                          <!-- menuLink -->
+                          <label for="category" class="form-label me-auto ms-2" style="font-size: 14px; color: #C0AB8E; ">種類</label>
+                          <select name="" id="category"  class="form-select border-0">
+                            <option value="全部">全部</option>
+                          </select>
+                        </li>
+                        <li class="text-center border-bottom pb-3 d-flex flex-column">
+                          <!-- menuLink -->
+                          <label for="category" class="form-label me-auto ms-2 mt-2" style="font-size: 14px; color: #C0AB8E; ">成本</label>
+                          <select name="" id="category"  class="form-select border-0">
+                            <option value="全部">全部</option>
+                          </select>
+                        </li>
+                        <li class="text-center border-bottom pb-3 d-flex flex-column">
+                          <!-- menuLink -->
+                          <label for="category" class="form-label me-auto ms-2 mt-2" style="font-size: 14px; color: #C0AB8E; ">評價</label>
+                          <select name="" id="category"  class="form-select border-0">
+                            <option value="全部">全部</option>
+                          </select>
+                        </li>
+                      </ul>
+                      <div class="bg-white border-0 position-relative">
+                        <input type="search" class="form-control rounded-pill my-4 py-2" placeholder="請輸入甜點名稱" style="border-color: #C0AB8E;">
+                        <button type="submit" class="border-0 bg-transparent position-absolute top-50 translate-middle start-100 pe-5">
+                          <img src="./images/icon-search.png" style="height: 25px;" alt="">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- 禁止顯示 新增modal取代手機板 -->
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- mx-auto ul 置中 -->
+                <ul class="navbar-nav mx-auto">
+                  <li class="nav-item me-3">
+                    <a class="nav-link brown " aria-current="page" href="#">甜點食譜</a>
+                  </li>
+                  <li class="nav-item mx-3">
+                    <a class="nav-link brown" href="#">材料購買</a>
+                  </li>
+                  <li class="nav-item mx-3">
+                    <a class="nav-link brown" href="#">優惠特報</a>
+                  </li>
+                  <li class="nav-item ms-3">
+                    <a class="nav-link brown" href="#">會員專區</a>
+                  </li>
+                </ul>
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+                  <li class="nav-item me-3">
+                    <a class="nav-link brown" href="#">登入</a>
+                  </li>
+                  <li class="nav-item ms-3">
+                    <a class="nav-link brown btn brown-button badge rounded-pill fs-6 px-4 btn-pd" href="#">註冊
+                    </a>
+                    
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- <div style="clip-path: polygon(49% 0, 25% 100%, 72% 100%);
+            width:30px; height: 20px; background-color: #F5AE4C; margin-left: 1000px;"></div> -->
+          </nav>
+        </div>
+        <!-- style="z-index: 2001 !important;" -->
+        <div class="d-none d-lg-block position-relative" >
+          <svg class="position-absolute" style="right:335px; top:-10px; opacity: 0.9;"  width="20" height="20" viewBox="-50 -50 300 300">
+            <polygon class="triangle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
+          </svg>
+          <span class="badge p-3 position-absolute" style="background-color: #F5AE4C; font-size: 18px; right:255px; top: 0; opacity: 0.9;">
+            立即註冊抽獎去！
+          </span>
+        </div>
+      </div>
+     
+     
+        <header class="banner">
+          <!-- banner裡面的東西 -->
+          <div class="container d-flex  flex-column justify-content-lg-center align-items-lg-start align-items-center bannerContent">
+            <div class="mt-5 mb-lg-80"> 
+              <h1 class="HanziPen-TC fw-bold lh-base h1Text" style="letter-spacing:10px;">甜點食譜加材料<br>
+                一次購足好簡單
+              </h1>
+              <p class="light-brown text-center text-lg-start mb-0 subTitle">用最優惠的價格<br class="d-block d-lg-none"> 享受最高品質的食材</p>
+            </div>
+            <div class="col-5 d-none d-lg-block">
+              <p class="light-brown mb-0"><img src="./images/icon-speaker.png" style="height: 30px;" alt="">免費觀看甜點食譜及教學，立即搜索心儀食譜！</p>
+              <div class="card" style="border-color: #C0AB8E;">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-4 border-end" style="border-color: #C0AB8E !important;">
+                      <p class="card-title middle-brown mb-0" style="font-size: 14px;">成本</p>
+                      <select name="全部" id="" class="form-select border-0 brown ps-0">
+                        <option value="全部" selected>全部</option>
+                        <option value="美式">美式</option>
+                        <option value="台式">台式</option>
+                        <option value="日式">日式</option>
+                      </select>
+                    </div>
+                    <div class="col-4 border-end" style="border-color: #C0AB8E !important;">
+                      <p class="card-title middle-brown mb-0" style="font-size: 14px;">評價</p>
+                      <select name="全部" id="" class="form-select border-0 brown ps-0">
+                        <option value="全部" selected>全部</option>
+                        <option value="美式">美式</option>
+                        <option value="台式">台式</option>
+                        <option value="日式">日式</option>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <p class="card-title middle-brown mb-0" style="font-size: 14px;">種類</p>
+                      <select name="全部" id="" class="form-select border-0 brown ps-0">
+                        <option value="全部" selected>全部</option>
+                        <option value="美式">美式</option>
+                        <option value="台式">台式</option>
+                        <option value="日式">日式</option>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+                <!--  position-relative 這個要寫在裡面 -->
+                <div class="card-footer bg-white border-0 position-relative">
+                  <input type="search" class="form-control rounded-pill mb-2" placeholder="請輸入甜點名稱" style="border-color: #C0AB8E;">
+                  <button type="submit" class="border-0 bg-transparent position-absolute top-50 translate-middle end-0 pb-2">
+                    <img src="./images/icon-search.png" style="height: 25px;" alt="">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="py-100-sm-40">
+          <div class="container">
+            <h2 class="display-6 fw-bold d-flex flex-column-reverse flex-lg-row align-items-center mb-4 justify-content-center justify-content-lg-start">
+              <div class="d-flex align-items-center">
+                <img src="./images/image 1.png" class="me-lg-4 me-2 titleImg" alt="">
+                <span class="recipeTitle">門食譜</span>
+              </div>
+              <span class="light-brown mb-2 h6 ms-2 speakerText d-flex align-items-center">
+                <img src="./images/icon-speaker.png" class="speaker" alt="">
+                一鍵購買甜點材料包～
+              </span>
+            </h2>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button type="button" class=" bg-transparent btn border-0 d-none d-lg-block" style="margin-bottom: 60px;">
+              <img src="./images/icon-back.png" style="height: 35px;" alt="">
+            </button>
+            <!-- 內容 -->
+            <div class="row gy-4 row-cols-lg-4 row-cols-1 container">
+              <div class="col">
+                <div class="card position-relative border-0" style="border-radius: 20px;">
+                  <img src="./images/popular-image1.png" class="card-img img-fluid" style="border-radius: 20px;" alt="">
+                  <div class="card-img-overlay ">
+                    <h5 class="card-text d-flex flex-column ">
+                      <button type="button" class="bookmarkBtn border-0 bg-transparent me-auto">
+                        <img src="./images/image 5.png">
+                      </button>
+                      <button type="button" class="border-0 bg-transparent position-absolute m-3 top-50 end-0 buyBtn">
+                        <img src="./images/icon-cart.png" style="height: 48px;" alt="">
+                        <!-- <img src="./images/icon-cart-hover.png"> -->
+                      </button>
+                    </h5>
+                  </div>
+                  <div class="card-footer bg-white border-0">
+                    <h5 class="h5 d-flex justify-content-between fw-bold">
+                      巴斯克起司蛋糕
+                      <span>$70</span>
+                    </h5>
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star.png" style="height: 15px;" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card position-relative border-0" style="border-radius: 20px;">
+                  <img src="./images/popular-image2.png" class="card-img img-fluid" style="border-radius: 20px;" alt="">
+                  <div class="card-img-overlay ">
+                    <h5 class="card-text d-flex flex-column ">
+                      <button type="button" class="bookmarkBtn border-0 bg-transparent me-auto">
+                        <img src="./images/image 5.png">
+                      </button>
+                      <button type="button" class="buyBtn border-0 bg-transparent position-absolute m-3 top-50 end-0">
+                        <img src="./images/icon-cart.png" style="height: 48px;" alt="">
+                      </button>
+                    </h5>
+                  </div>
+                  <div class="card-footer bg-white border-0">
+                    <h5 class="h5 d-flex justify-content-between fw-bold">
+                      杯子蛋糕
+                      <span>$70</span>
+                    </h5>
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star.png" style="height: 15px;" alt="">
+    
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card position-relative border-0" style="border-radius: 20px;">
+                  <img src="./images/popular-image3.png" class="card-img img-fluid" style="border-radius: 20px;" alt="">
+                  <div class="card-img-overlay">
+                    <h5 class="card-text d-flex flex-column ">
+                      <button type="button" class="bookmarkBtn border-0 bg-transparent me-auto">
+                        <img src="./images/image 5.png">
+                      </button>
+                      <button type="button" class="buyBtn border-0 bg-transparent position-absolute m-3 top-50 end-0">
+                        <img src="./images/icon-cart.png" style="height: 48px;" alt="">
+                      </button>
+                    </h5>
+                  </div>
+                  <div class="card-footer bg-white border-0">
+                    <h5 class="h5 d-flex justify-content-between fw-bold">
+                      脆皮軟心布朗尼
+                      <span>$70</span>
+                    </h5>
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star.png" style="height: 15px;" alt="">
+    
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card position-relative border-0" style="border-radius: 20px;">
+                  <img src="./images/popular-image4.png" class="card-img " style="border-radius: 20px;" alt="">
+                  <div class="card-img-overlay ">
+                    <h5 class="card-text d-flex flex-column ">
+                      <button type="button" class="bookmarkBtn border-0 bg-transparent me-auto">
+                        <img src="./images/image 5.png">
+                      </button>
+                      <button type="button" class="buyBtn border-0 bg-transparent position-absolute m-3 top-50 end-0">
+                        <img src="./images/icon-cart.png" style="height: 48px;" alt="">
+                      </button>
+                    </h5>
+                  </div>
+                  <div class="card-footer bg-white border-0">
+                    <h5 class="h5 d-flex justify-content-between fw-bold">
+                      繽紛馬卡龍
+                      <span>$70</span>
+                    </h5>
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star.png" style="height: 15px;" alt="">
+    
+                  </div>
+                </div>
+              </div>
+              <div class="col d-flex justify-content-center d-lg-none" style="margin-bottom: 20px;">
+                <button type="button" class="btn brown-button rounded-pill btn-lg px-5">
+                  更多食譜
+                </button>
+              </div>
+            </div>
+            <button type="button" class="border-0 bg-transparent d-none d-lg-block" style="margin-bottom: 60px;">
+              <img src="./images/icon-next.png" style="height: 35px;" alt="">
+            </button>
+          </div>
+        </section>
+
+        <!-- 多兩個100 -->
+        <!-- py-100-sm-60 -->
+        <section class="py-100-sm-60 px-3" style="background-color: #FBF8F3;">
+          <div class="container bg-white py-lg-5 py-4" style="border-radius: 20px;">
+            <h2 class="h4 fw-bold text-center mb-4 questionTitle">總是花錢花時間 尋找甜點材料嗎？</h2>
+            <div class="px-5">
+              <div class="row row-cols-1 row-cols-lg-3 gy-4">
+                <div class="col ps-lg-5 d-flex flex-column flex-lg-row  align-items-center">
+                  <div class="mb-2 me-lg-3">
+                    <img src="./images/icon-money.png" style="height: 48px;" alt="">
+                  </div>
+                  <span class="h5 questions">
+                    花了錢卻買不到好食材...
+                  </span>
+                </div>
+                <div class="col ps-lg-5 d-flex flex-column flex-lg-row  align-items-center">
+                  <div class="mb-2 me-lg-3">
+                    <img src="./images/icon-time.png" style="height: 48px;" alt="">
+                  </div>
+                  <span class="h5 questions">
+                    花時間找尋食材卻找不到...
+                  </span>
+                </div>
+                <div class="col  ps-lg-5 d-flex flex-column flex-lg-row  align-items-center">
+                  <div class="mb-2 me-lg-3">
+                    <img src="./images/icon-box.png" style="height: 48px;" alt="">
+                  </div>
+                  <span class="h5 questions">
+                    大包裝食材用不完好煩惱...
+                  </span>
+                </div>
+              </div>
+            </div>
+          
+          </div>
+          <!-- py-100-sm-40 -->
+          <div class="container pt-100-sm-40">
+            <h2 class="h2 fw-bold fixedTitle mb-4 d-flex flex-column flex-lg-row justify-content-lg-center align-items-center">
+              <img src="./images/Line 7 (Stroke).png" class="d-none d-lg-block" alt="">
+              一站解決你的所有問題
+              <img src="./images/Line 6 (Stroke).png" class="d-none d-lg-block" alt="">
+              <div>
+                <img src="./images/horizonLine.png" class="d-lg-none d-block" style="height: 4px;" alt="">
+              </div>
+            </h2>
+            <div class="row g-4 row-cols-lg-2 justify-content-center">
+              <div class="col-lg-5">
+                <div class="card border-0 shadow" style="border-radius: 20px;">
+                  <img src="./images/feature-image1.png" style="border-radius: 20px;" class="card-img" alt="...">
+                  <div class="card-img-overlay d-flex flex-column justify-content-end" style="background-image: linear-gradient(180deg , transparent, rgba(255, 255, 255,0.2), rgba(255, 255, 255)); border-radius: 20px;">
+                    <h5 class="card-title h4 fw-bold contentTitle">立即取得食譜材料</h5>
+                    <p class="card-text" style="font-size: 14px;">使用首頁上方搜尋欄尋找食譜，所有食譜皆有列出製作材料、工具，點擊購買即可一次買齊。</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="card border-0 shadow" style="border-radius: 20px;">
+                  <img src="./images/feature-image2.png" style="border-radius: 20px;" class="card-img" alt="...">
+                  <div class="card-img-overlay d-flex flex-column justify-content-end" style="background-image: linear-gradient(180deg , transparent, rgba(255, 255, 255,0.2), rgba(255, 255, 255)); border-radius: 20px;">
+                    <h5 class="card-title h4 fw-bold contentTitle">便宜且份量適中的食材</h5>
+                    <p class="card-text" style="font-size: 14px;">提供甜點食譜組合包，讓您輕鬆選購需要的材料數量，不須擔心買到過多的食材也省下很多錢。</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="card border-0 shadow" style="border-radius: 20px;">
+                  <img src="./images/feature-image3.png" style="border-radius: 20px;" class="card-img" alt="...">
+                  <div class="card-img-overlay d-flex flex-column justify-content-end" style="background-image: linear-gradient(180deg , transparent, rgba(255, 255, 255,0.2), rgba(255, 255, 255)); border-radius: 20px;">
+                    <h5 class="card-title h4 fw-bold contentTitle">甜點食譜＋影片教學</h5>
+                    <p class="card-text" style="font-size: 14px;">免費甜點食譜和完整講解的影片教學，一定帶你學到會！不上烘焙課也能有良好的製作體驗。</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="card border-0 shadow" style="border-radius: 20px;">
+                  <img src="./images/feature-image4.png" style="border-radius: 20px;" class="card-img" alt="...">
+                  <div class="card-img-overlay d-flex flex-column justify-content-end" style="background-image: linear-gradient(180deg , transparent, rgba(255, 255, 255,0.2), rgba(255, 255, 255)); border-radius: 20px;">
+                    <h5 class="card-title h4 fw-bold contentTitle">優惠不間斷</h5>
+                    <p class="card-text" style="font-size: 14px;">消費滿1000元免運費
+                      每月抽獎活動，享價值千元以上好禮！</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="py-100-sm-40 ">
+          <div class="container">
+            <h2 class="display-6 fw-bold d-flex align-items-center mb-4 d-flex flex-column-reverse flex-lg-row align-items-center mb-4 justify-content-center justify-content-lg-start">
+              <div class="d-flex align-items-center">
+                <img src="./images/title2.png" class="me-lg-4 me-2 titleImg " alt="">
+                <span class="recipeTitle">價商品</span>
+              </div>
+              <span class="light-brown mb-2 h6 ms-2 speakerText d-flex align-items-center">
+                <img src="./images/icon-speaker.png" class="speaker" alt="">
+                總消費額滿500即可獲得1次抽獎機會!
+              </span>
+            </h2>
+          </div>
+          <div class="d-flex align-items-center justify-content-center">
+            <button type="button" class="border-0 bg-transparent d-none d-lg-block" style="margin-bottom: 60px;">
+              <img src="./images/icon-back.png" style="height: 35px;" alt="">
+            </button>
+            <div class="row row-cols-lg-4 row-cols-1 gy-4 container">
+              <div class="col">
+                <div class="card position-relative border-0" style="border-radius: 20px;">
+                  <img src="./images/sale-image1.png" class="card-img " style="border-radius: 20px;" alt="">
+                  <div class="card-img-overlay ">
+                    <h5>
+                      <span class="badge text-dark text-white py-2 shadow" style="background-color: #F5AE4C;">
+                        40%off
+                      </span>
+                    </h5>
+                    <h5 class="card-text">
+                      <button type="button" class="buyBtn border-0 bg-transparent me-2 position-absolute top-50 end-0 ">
+                        <img src="./images/icon-cart.png" style="height: 48px;" alt="" class="rounded-circle shadow-sm">
+                      </button>
+                    </h5>
+                  </div>
+                  <div class="card-footer bg-white border-0">
+                    <h5 class="h5 d-flex justify-content-between fw-bold">
+                      自動攪拌機
+                      <span>$2,000</span>
+                    </h5>
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star.png" style="height: 15px;" alt="">
+  
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card position-relative border-0" style="border-radius: 20px;">
+                  <img src="./images/sale-image4.png" class="card-img " style="border-radius: 20px;" alt="">
+                  <div class="card-img-overlay ">
+                    <h5>
+                      <span class="badge text-dark text-white py-2 shadow" style="background-color: #F5AE4C;">
+                        40%off
+                      </span>
+                    </h5>
+                    <h5 class="card-text">
+                      <button type="button" class="buyBtn border-0 bg-transparent me-2 position-absolute top-50 end-0 ">
+                        <img src="./images/icon-cart.png" style="height: 48px;" alt="" class="rounded-circle shadow-sm">
+                      </button>
+                    </h5>
+                  </div>
+                  <div class="card-footer bg-white border-0">
+                    <h5 class="h5 d-flex justify-content-between fw-bold">
+                      去污清潔粉
+                      <span>$700</span>
+                    </h5>
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star.png" style="height: 15px;" alt="">
+  
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card position-relative border-0" style="border-radius: 20px;">
+                  <img src="./images/sale-image2.png" class="card-img " style="border-radius: 20px;" alt="">
+                  <div class="card-img-overlay ">
+                    <h5>
+                      <span class="badge text-dark text-white py-2 shadow" style="background-color: #F5AE4C;">
+                        40%off
+                      </span>
+                    </h5>
+                    <h5 class="card-text">
+                      <button type="button" class="buyBtn border-0 bg-transparent me-2 position-absolute top-50 end-0 ">
+                        <img src="./images/icon-cart.png" style="height: 48px;" alt="" class="rounded-circle shadow-sm">
+                      </button>
+                    </h5>
+                  </div>
+                  <div class="card-footer bg-white border-0">
+                    <h5 class="h5 d-flex justify-content-between fw-bold">
+                      抹茶粉
+                      <span>$50/100g</span>
+                    </h5>
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star.png" style="height: 15px;" alt="">
+  
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card position-relative border-0" style="border-radius: 20px;">
+                  <img src="./images/sale-image3.png" class="card-img " style="border-radius: 20px;" alt="">
+                  <div class="card-img-overlay ">
+                    <h5>
+                      <span class="badge text-dark text-white py-2 shadow" style="background-color: #F5AE4C;">
+                        40%off
+                      </span>
+                    </h5>
+                    <h5 class="card-text">
+                      <button type="button" class="buyBtn border-0 bg-transparent me-2 position-absolute top-50 end-0 ">
+                        <img src="./images/icon-cart.png" style="height: 48px;" alt="" class="rounded-circle shadow-sm">
+                      </button>
+                    </h5>
+                  </div>
+                  <div class="card-footer bg-white border-0">
+                    <h5 class="h5 d-flex justify-content-between fw-bold">
+                      原木組合
+                      <span>$5,000</span>
+                    </h5>
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star-filled.png" style="height: 15px;" alt="">
+                    <img src="./images/icon-star.png" style="height: 15px;" alt="">
+  
+                  </div>
+                </div>
+              </div>
+              <div class="col d-flex justify-content-center d-lg-none" style="margin-bottom: 20px;">
+                <button type="button" class="btn brown-button rounded-pill btn-lg px-5 fw-bold">
+                  更多商品
+                </button>
+              </div>
+            </div>
+            <button type="button" class="border-0 bg-transparent d-none d-lg-block" style="margin-bottom: 60px;">
+              <img src="./images/icon-next.png" style="height: 35px;" alt="">
+            </button>
+          </div>
+        </section>
+        
+        <footer style="background-color: #FBF8F3;">
+          <div class="container d-flex flex-column flex-lg-row align-items-center" style="padding: 40px 0;">
+            <img src="./images/logo.png" class="logo mb-4 mb-lg-0 " alt="">
+            <div class="ms-lg-auto">
+              <ul class="list-unstyled d-flex justify-content-lg-end justify-content-center">
+                <li class="me-4">
+                  <a href="#" class="text-decoration-none">
+                    <img src="./images/icon-ig.png" style="height: 40px;" alt="">
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    <img src="./images/icon-fb.png" style="height: 40px;" alt="">
+                  </a>
+                </li>
+              </ul>
+              <p class="mb-0 text-center text-lg-start" style="font-size: 10px;">本網站僅作為網頁製作練習使用<br class="d-block d-lg-none"><span class="d-none d-lg-inline-block">，</span>圖片、資料源自網路，無任何商業利益行為</p>
+              <p class="mb-0 text-lg-end text-center" style="font-size: 10px;">Copyright © 2022 甜點食譜一鍵購 All Rights Reserved.</p>
+            </div>
+          </div>
+        </footer>
+
+        
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>  
+    <script>
+        
+    </script>
+</body>
+</html>
